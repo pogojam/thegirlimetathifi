@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import Splash from './components/splash'
+import Game from './components/game/game'
+
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+        active:'game'
+    }
+  }
+  
+
+  startGame(){
+    this.setState({
+      active:'game'
+    })
+  }
+
   render() {
+    const {active} = this.state
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+        {active==='splash'&& <Splash startGame={this.startGame.bind(this)} />}
+        {active==='game'&& <Game/>}
         </header>
       </div>
     );
